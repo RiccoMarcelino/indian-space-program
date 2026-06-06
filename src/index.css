@@ -1,0 +1,172 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════════════════════
+   INDUSTRIAL CINEMATIC EDITORIAL — BASE LAYER
+   ═══════════════════════════════════════════════════════════ */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: #0a0a0a;
+  color: #e4e4e7;
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* ─── Scrollbar Styling ─── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46;
+}
+
+/* ─── Selection ─── */
+::selection {
+  background: rgba(248, 49, 47, 0.3);
+  color: #fff;
+}
+
+/* ─── Wireframe Grid Overlay ─── */
+.wireframe-grid {
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 8.33vw 8.33vw;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ─── Typewriter Cursor ─── */
+.typewriter-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 1em;
+  background-color: #f8312f;
+  margin-left: 4px;
+  animation: blink 0.8s step-end infinite;
+  vertical-align: text-bottom;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ─── HUD Ring Animation ─── */
+@keyframes hudSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes hudSpinReverse {
+  0% { transform: rotate(360deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.hud-ring {
+  animation: hudSpin 6s linear infinite;
+}
+
+.hud-ring-reverse {
+  animation: hudSpinReverse 10s linear infinite;
+}
+
+/* ─── Glow Pulse ─── */
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.05); }
+}
+
+.glow-pulse {
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+/* ─── Shimmer Animation ─── */
+@keyframes shimmer {
+  0% { transform: translateX(-150%) skewX(-20deg); }
+  100% { transform: translateX(350%) skewX(-20deg); }
+}
+
+/* ─── Glassmorphism Industrial Card ─── */
+.industrial-card {
+  position: relative;
+  overflow: hidden; /* Needed to contain shimmer */
+  background: linear-gradient(135deg, rgba(26, 26, 36, 0.6) 0%, rgba(17, 17, 19, 0.8) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255,255,255,0.05);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
+}
+
+.industrial-card:hover {
+  border-color: rgba(248, 49, 47, 0.3);
+  box-shadow: 0 12px 40px rgba(248, 49, 47, 0.08), inset 0 1px 0 rgba(255,255,255,0.08);
+  transform: translateY(-2px);
+}
+
+/* Top red line hover effect */
+.industrial-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(248, 49, 47, 0.4), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 10;
+}
+.industrial-card:hover::before {
+  opacity: 1;
+}
+
+/* Shimmer Sweep */
+.industrial-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 30%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.04), transparent);
+  animation: shimmer 5s infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ─── Status Dot ─── */
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #f8312f;
+  box-shadow: 0 0 8px #f8312f, 0 0 16px rgba(248, 49, 47, 0.3);
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* Text Morph Utility Class */
+.text-morph {
+  will-change: filter, opacity, transform;
+}
